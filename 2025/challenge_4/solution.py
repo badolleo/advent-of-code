@@ -1,37 +1,47 @@
 
 output = 0
 input = ""
+
+# This function in n equal parts the array s
+def split_equal_parts(s, n):
+    taille_partie = len(s) // n
+    return [s[i:i+taille_partie] for i in range(0, len(s), taille_partie)]
+
+# This function check if the number is a repetition of a patern or not
+# We rty first to split the number in 2, and we check if both parts are equals. 
+# If not, we increment the number of part we split the number until we reach the one by one element repetition
+def check_patern(number):
+    for patern_size in range(len(number) // 2, 0, -1):
+        if len(number) % (len(number) // patern_size) != 0:
+            continue
+
+        paterns_list = split_equal_parts(number, len(number) // patern_size)
+
+        if len(set(paterns_list)) == 1:
+            return True
+    return False
+
+
 with open("input.txt", 'r') as file:
     for line in file:
         input += line
 
 input_list = input.split(",")
 
+# We try, for each range of our input, if each element of this range is a patern repetition
 for rng in input_list:
     
     number_1 = rng.split('-')[0]
     number_2 = rng.split('-')[1]
-    
     for number in range(int(number_1), int(number_2) + 1):
         number = str(number)
+        result = check_patern(number)
         
-        size_of_substring = 1
-        for _ in range(1, len(number)//2):
-            first_substring = ""
-            verif = True
-            if len(number) % size_of_substring != 0:
-                continue
-            for substring in range(0, len(number), size_of_substring):
-                if first_substring == "":
-                    first_substring = number[substring:substring + size_of_substring]
-                    continue
-                else:
-                    if number[substring:substring + size_of_substring] != first_substring:
-                        verif = False
-                        break
-            if verif:
-                output += number
-                break
-            size_of_substring += 1
+        # Result is True if the number we consider is a patern repetition or not
+        if result:
+            output += int(number)
+
 
 print(output)
+
+
