@@ -1,4 +1,4 @@
-# Challenge 4
+# Challenge 6
 ## How to execute :
 you only need to execute, with python, "solution.py"
 
