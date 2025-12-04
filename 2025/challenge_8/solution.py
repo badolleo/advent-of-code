@@ -1,11 +1,13 @@
 import time
 
-start_time = time.time()
-
 output = 0
 input = []
 
+start_time = time.time()
+
 def get_neighbor(matrice, x, y):
+    # This function returns the number of rolls there is next to our x, y roll entry
+    
     number_of_neighbor = 0
     rows = len(matrice)
     cols = len(matrice[0])
@@ -23,7 +25,8 @@ def get_neighbor(matrice, x, y):
             if 0 <= nx < rows and 0 <= ny < cols:
                 if matrice[nx][ny] == '@':
                     number_of_neighbor += 1
-    # print(f"for coords x : {x} and y : {y}, there is {number_of_neighbor} neighbors")
+    
+    # print(f"for coords x : {x} and y : {y}, there is {number_of_neighbor} neighbors")
     return number_of_neighbor
 
 
@@ -32,13 +35,23 @@ with open("input.txt", 'r') as file:
         line = line.strip()
         if line != "":
             input.append(list(line.strip()))
-
-for y in range(0, len(input)):
-    for x in range(0, len(input[y])):
-        if input[y][x] == '@':
-            if get_neighbor(input, y, x) < 4:
-                output += 1
+while True:
+    # For each roll
+    liste_of_rows_to_remove = []
+    for y in range(0, len(input)):
+        for x in range(0, len(input[y])):
+            if input[y][x] == "@":
+                if get_neighbor(input, y, x) < 4:
+                    output += 1
+                    liste_of_rows_to_remove.append((y,x))
+    
+    if len(liste_of_rows_to_remove) == 0:
+        break
+    
+    for x, y in liste_of_rows_to_remove:
+        input[x][y] = "."
 
 end_time = time.time()
 print(f"Finished in {end_time - start_time:.4f}s")
 print(f"output : {output}")
+
