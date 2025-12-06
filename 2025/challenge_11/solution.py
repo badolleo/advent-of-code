@@ -13,9 +13,12 @@ class Challenge:
         input = []
         index = 0
 
+        # Recover all our inputs data from the file "input.txt"
         with open("input.txt", "r") as file:
             for line in file:
-                input.append([])
+                input.append(
+                    []
+                )  # input is a list where each element represent a row of the input.
                 line = line.strip().split(" ")
 
                 for char in line:
@@ -24,10 +27,12 @@ class Challenge:
 
                 index += 1
 
+        # First, we need to recover number column by column
         for column in range(0, len(input[0])):
-            numbers = []
-            operation = input[-1][column]
+            numbers = []  # Numbers in the column
+            operation = input[-1][column]  # The operation to perform on the numbers
 
+            # We parse all rows to recover the numbers in the column except that last one because it's the operation
             for row in range(0, len(input) - 1):
                 numbers.append(int(input[row][column]))
 
