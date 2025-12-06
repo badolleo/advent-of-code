@@ -1,5 +1,4 @@
 import time
-from doctest import OutputChecker
 
 
 class Challenge:
