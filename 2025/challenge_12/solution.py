@@ -1,14 +1,21 @@
+import sys
 import time
-from symtable import Symbol
+from pathlib import Path
 
 import numpy as np
-from numpy._core.numerictypes import number
+
+if __name__ == "__main__":
+    # Remonte de 2 niveaux pour atteindre la racine
+    root_dir = Path(__file__).parent.parent.parent
+    sys.path.insert(0, str(root_dir))
+
+from challenge import Challenge
 
 
-class Challenge:
+class Solution(Challenge):
     def __init__(self) -> None:
-        self.output = 0
-        self.time_elapsed = 0
+        super().__init__()
+        self.challenge_dir = Path(__file__).parent
 
     # This function will add space at the end of each line in order to unify their size
     def unify_rows(self, input):
@@ -26,7 +33,7 @@ class Challenge:
         input = []
 
         # Recover all our inputs data from the file "input.txt"
-        with open("input.txt", "r") as file:
+        with open(self.challenge_dir / "input.txt", "r") as file:
             for line in file:
                 input.append(line.removesuffix("\n"))
 
@@ -72,7 +79,7 @@ class Challenge:
                 if operation == "+":
                     self.output += np.sum(numbers)
                 elif operation == "*":
-                    self.output += np.prod(numbers)
+                    self.output += int(np.prod(numbers))
                 numbers = []
                 operation = ""
 
@@ -87,5 +94,5 @@ class Challenge:
 
 
 if __name__ == "__main__":
-    challenge = Challenge()
+    challenge = Solution()
     challenge.resolve(True)

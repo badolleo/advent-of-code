@@ -1,16 +1,19 @@
 import time
+from pathlib import Path
+
+from challenge import Challenge
 
 
-class Challenge:
+class Solution(Challenge):
     def __init__(self):
-        self.output = 0
-        self.time_elapsed = 0
+        super().__init__()
+        self.challenge_dir = Path(__file__).parent
 
     def resolve(self, standalone=False):
         start_time = time.time()
         input_ranges = []
 
-        with open("input.txt", "r") as file:
+        with open(self.challenge_dir / "input.txt", "r") as file:
             for line in file:
                 line = line.strip()
 
@@ -61,5 +64,5 @@ class Challenge:
 
 
 if __name__ == "__main__":
-    challenge = Challenge()
+    challenge = Solution()
     challenge.resolve()

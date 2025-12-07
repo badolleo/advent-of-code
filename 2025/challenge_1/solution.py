@@ -1,16 +1,19 @@
 import time
+from pathlib import Path
+
+from challenge import Challenge
 
 
-class Challenge:
+class Solution(Challenge):
     def __init__(self):
-        self.position = 50
-        self.output = 0
-        self.time_elapsed = 0
+        super().__init__()
+        self.position: int = 50
+        self.challenge_dir = Path(__file__).parent
 
-    def resolve(self, standalone=False):
+    def resolve(self, standalone: bool = False) -> int:
         start_time = time.time()
 
-        with open("input.txt", "r") as file:
+        with open(self.challenge_dir / "input.txt", "r") as file:
             # I copy past each lined of the input int the file input.txt
             # then we recover each line of treat them one by one
             for line in file:
@@ -43,4 +46,4 @@ class Challenge:
 
 
 if __name__ == "__main__":
-    Challenge().resolve(standalone=True)
+    Solution().resolve(standalone=True)
