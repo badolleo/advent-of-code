@@ -99,8 +99,10 @@ def resolve_challenges(year):
             + Style.RESET_ALL
         )
 
-        end_time = time.time()
-        print(f"Tout les challenges ont été éxecutés en {(end_time - start_time):.4f}s")
+    end_time = time.time()
+    print(
+        f"Tout les challenges ont été éxecutés en {Style.BRIGHT}{Fore.GREEN}{(end_time - start_time):.4f}s{Style.RESET_ALL}"
+    )
 
 
 if __name__ == "__main__":
