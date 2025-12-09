@@ -77,6 +77,7 @@ class Solution(Challenge):
 
         self.input = liste
 
+    # Function that recover the char 'S' in the first line of the input
     def found_start(self):
         for char in range(0, len(self.input[0])):
             if self.input[0][char][0] == "S":
